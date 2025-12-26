@@ -135,4 +135,18 @@ def movie_details(call):
 
 # ================= RUN ====================
 print("Bot started...")
-bot.infinity_polling(timeout=60, long_polling_timeout=60)
+bot.infinity_polling(timeout=60, long_polling_timeout=60)from flask import Flask
+import threading
+import os
+
+app = Flask(__name__)
+
+@app.route("/")
+def home():
+    return "Bot is running"
+
+def run_web():
+    port = int(os.environ.get("PORT", 8000))
+    app.run(host="0.0.0.0", port=port)
+
+threading.Thread(target=run_web).start()
